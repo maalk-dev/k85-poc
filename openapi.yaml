@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Order API
+  version: 1.0.0
+  description: REST API for creating orders.
+
+paths:
+  /orders:
+    post:
+      summary: Create an order
+      operationId: createOrder
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderRequest"
+            example:
+              customerId: "cuid_customer_123"
+              items:
+                - productId: "cuid_product_456"
+                  quantity: 2
+                - productId: "cuid_product_789"
+                  quantity: 1
+      responses:
+        "201":
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderConfirmation"
+        "400":
+          description: Malformed request body or invalid field values
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: BAD_REQUEST
+                message: "items must contain at least one entry"
+        "404":
+          description: Customer or product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: NOT_FOUND
+                message: "Product cuid_product_456 not found"
+        "409":
+          description: Insufficient stock for one or more products
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: INSUFFICIENT_STOCK
+                message: "Insufficient stock for product cuid_product_456"
+        "500":
+          description: Unexpected internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+        - customerId
+        - items
+      properties:
+        customerId:
+          type: string
+          description: ID of the customer placing the order
+        items:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/OrderItemRequest"
+
+    OrderItemRequest:
+      type: object
+      required:
+        - productId
+        - quantity
+      properties:
+        productId:
+          type: string
+          description: ID of the product
+        quantity:
+          type: integer
+          minimum: 1
+          description: Number of units to order
+
+    OrderConfirmation:
+      type: object
+      required:
+        - orderId
+        - customerId
+        - status
+        - totalAmount
+        - items
+        - createdAt
+      properties:
+        orderId:
+          type: string
+        customerId:
+          type: string
+        status:
+          type: string
+          enum: [ CONFIRMED ]
+        totalAmount:
+          type: number
+          format: double
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItemConfirmation"
+        createdAt:
+          type: string
+          format: date-time
+
+    OrderItemConfirmation:
+      type: object
+      required:
+        - productId
+        - quantity
+        - unitPrice
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+        unitPrice:
+          type: number
+          format: double
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+        message:
+          type: string

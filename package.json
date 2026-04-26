@@ -1,0 +1,42 @@
+{
+  "name": "k85-poc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.2+sha512.a90faf6feeab71ad6c6e57f94e0fe1a12f5dcc22cd754db40ae9593eb6a3e0b6b12e3540218bb37ae083404b1f2ce6db2a4121e979829b4aff94b99f49da1cf8",
+  "scripts": {
+    "build": "tsc --project .",
+    "bump": "pnpm run bump:pnpm && pnpm run bump:deps",
+    "bump:deps": "pnpm update --interactive --latest --recursive",
+    "bump:pnpm": "corepack use pnpm@latest",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "lint:fix-unsafe": "biome check --write --unsafe .",
+    "dev": "tsx --watch src/index.ts",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "test": "vitest run '.unit.test.ts'",
+    "test:specific": "vitest --watch '.unit.test.ts'",
+    "test:specific:logs": "vitest --no-silent --watch"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.9",
+    "@types/express": "5.0.6",
+    "@types/node": "24.10.1",
+    "@types/pg": "8.20.0",
+    "prisma": "7.8.0",
+    "tsx": "4.21.0",
+    "vitest": "4.1.1"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.8.0",
+    "@prisma/client": "7.8.0",
+    "dotenv": "17.4.2",
+    "express": "5.2.1",
+    "pg": "8.20.0",
+    "typescript": "5.9.3",
+    "zod": "4.3.6"
+  }
+}

@@ -1,0 +1,31 @@
+allowBuilds:
+  "@prisma/client": true
+  "@prisma/engines": true
+  esbuild: true
+  prisma: true
+
+blockExoticSubdeps: true
+
+disallowWorkspaceCycles: true
+
+engineStrict: true
+
+minimumReleaseAge: 1440
+
+packageManagerStrict: true
+
+packageManagerStrictVersion: true
+
+savePrefix: ""
+
+strictDepBuilds: true
+
+trustPolicy: no-downgrade
+
+trustPolicyIgnoreAfter: 525600
+
+updateNotifier: false
+
+useNodeVersion: 24.13.0
+
+verifyDepsBeforeRun: install

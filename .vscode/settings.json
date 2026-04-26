@@ -1,0 +1,53 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true
+  },
+
+  "search.exclude": {
+    "pnpm-lock.yaml": true
+  },
+
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.preferences.importModuleSpecifier": "shortest",
+  "js/ts.preferences.autoImportSpecifierExcludeRegexes": ["^node:test$"],
+
+  "biome.enabled": true,
+  "biome.lsp.bin": "node_modules/.bin/biome",
+
+  "prettier.enable": false,
+  "eslint.enable": false,
+
+  "testing.automaticallyOpenTestResults": "neverOpen",
+
+  /*
+    Use the pnpm-managed Node.js binary (`useNodeVersion` in pnpm-workspace.yaml)
+    instead of whatever `node` is on $PATH. Version discrepancies can result in errors.
+    Example: Node.js 22 on system, 24 in project - code using 24 features will fail to run.
+    Letting the Vitest extension use the pnpm-managed binary resolves the problem.
+  */
+  "vitest.nodeExecutable": ".vscode/vitest-explorer/node-entrypoint.sh"
+}

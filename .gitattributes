@@ -1,0 +1,4 @@
+# Exclude noisy lockfile from difffs by default.
+# Run `pnpm install` for auto-resolving git conflicts.
+# Reference: https://pnpm.io/git
+pnpm-lock.yaml -diff
