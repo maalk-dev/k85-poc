@@ -54,5 +54,20 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["prisma/**/*"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "off"
+          },
+          "complexity": {
+            "useLiteralKeys": "off"
+          }
+        }
+      }
+    }
+  ]
 }
