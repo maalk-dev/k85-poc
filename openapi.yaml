@@ -114,8 +114,9 @@ components:
           type: string
           enum: [ CONFIRMED ]
         totalAmount:
-          type: number
-          format: double
+          type: string
+          description: Decimal monetary amount, serialised as a string to preserve precision
+          example: "79.97"
         items:
           type: array
           items:
@@ -136,8 +137,9 @@ components:
         quantity:
           type: integer
         unitPrice:
-          type: number
-          format: double
+          type: string
+          description: Decimal monetary amount, serialised as a string to preserve precision
+          example: "29.99"
 
     ErrorResponse:
       type: object
