@@ -68,6 +68,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["src/**/*"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "useLiteralKeys": "off"
+          }
+        }
+      }
     }
   ]
 }
