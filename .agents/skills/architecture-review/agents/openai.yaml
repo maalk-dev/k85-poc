@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Review"
+  short_description: "Review generated code against thesis criteria"
+  default_prompt: "Use $architecture-review to assess the current review branch and write the analysis file."
